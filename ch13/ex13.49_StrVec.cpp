@@ -1,4 +1,4 @@
-#include "ex13.40.h"
+#include "ex13.49_StrVec.h"
 #include <algorithm>
 using std::string;
 using std::pair;
@@ -53,6 +53,24 @@ StrVec::~StrVec()
     free();
 }
 
+StrVec::StrVec(StrVec&& s) noexcept
+    :elements(s.elements),first_free(s.first_free),cap(s.cap)
+{
+    s.elements = s.first_free = s.cap = nullptr;
+}
+
+StrVec &StrVec::operator=(StrVec &&rhs) noexcept
+{
+    if(this != &rhs){
+        free();
+        elements = rhs.elements;
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
+    return *this;
+}
+
 StrVec& StrVec::operator=(const StrVec &rhs)
 {
     auto data = alloc_n_copy(rhs.begin(), rhs.end());
@@ -91,7 +109,7 @@ void StrVec::reserve(size_t n)
     alloc_n_move(n);
 }
 
-void StrVec::resize(size_t n, const std::string &str =std::string() )
+void StrVec::resize(size_t n, const std::string &str = std::string())
 {
     if(n<=size()){
         while(first_free != elements + n){

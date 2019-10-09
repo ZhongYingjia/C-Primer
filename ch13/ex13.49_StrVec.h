@@ -1,11 +1,6 @@
-#ifndef EX13_40
-#define EX13_40
+#ifndef EX13_49_StrVec_H
+#define EX13_49_StrVec_H
 
-// #if _GLIBCXX_USE_CXX11_ABI
-// #  define DUAL_ABI cxx11 __attribute__((abi_tag("cxx11")))
-// #else
-// #  define DUAL_ABI cxx03
-// #endif
 
 #include <string>
 #include <memory>
@@ -17,6 +12,10 @@ public:
         elements(nullptr),first_free(nullptr),cap(nullptr){ }
     StrVec(const StrVec&);
     StrVec(std::initializer_list<std::string>);
+    
+    StrVec(StrVec&&) noexcept;
+    StrVec& operator=(StrVec&&) noexcept;
+
 
     StrVec& operator=(const StrVec&);
     ~StrVec();
@@ -27,7 +26,7 @@ public:
     std::string* begin() const { return elements; }
     std::string *end() const { return first_free; }
     void reserve(size_t);
-    void resize(size_t n, const std::string &str = std::string());
+    void resize(size_t n, const std::string &str);
 private:
     // static std::allocator<std::string> alloc;
     std::allocator<std::string> alloc;
