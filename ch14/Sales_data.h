@@ -25,6 +25,8 @@ public:
     Sales_data& operator+=(const Sales_data&);
     Sales_data& operator=(const std::string&);
 
+    explicit operator std::string() const { return bookNo; }
+    explicit operator double() const { return avg_price(); }
 
 private:
     double avg_price() const{return units_sold? revenue/units_sold:0;}
