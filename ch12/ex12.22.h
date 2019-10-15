@@ -94,7 +94,6 @@ class ConstStrBlobPtr{
         std::weak_ptr<std::vector<std::string> > wptr;
 };
 
-
 // ConstStrBlobPtr StrBlob::cbegin() const{
 //     return ConstStrBlobPtr(*this);
 // }
@@ -102,5 +101,6 @@ class ConstStrBlobPtr{
 // ConstStrBlobPtr StrBlob::cend() const{
 //     return ConstStrBlobPtr(*this,data->size());
 // }
+
 
 #endif
